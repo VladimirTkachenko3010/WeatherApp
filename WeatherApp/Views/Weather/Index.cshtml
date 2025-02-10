@@ -1,0 +1,30 @@
+﻿@model WeatherApp.Models.WeatherViewModel
+
+@{
+    ViewBag.Title = "Weather Forecast";
+}
+
+<h2>Weather Forecast</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (TempData["RainWarning"] != null)
+{
+    <div class="alert alert-warning">@TempData["RainWarning"]</div>
+}
+
+<form method="post" action="@Url.Action("GetWeather", "Weather")">
+    <input type="text" name="city" placeholder="Enter city" value="@Model.City" required />
+    <button type="submit">Get Weather</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+    <h3>Weather in @Model.City</h3>
+    <p>Description: @Model.Description</p>
+    <p>Temperature: @Model.Temperature °C</p>
+    <p>Min: @Model.TempMin °C, Max: @Model.TempMax °C</p>
+}
