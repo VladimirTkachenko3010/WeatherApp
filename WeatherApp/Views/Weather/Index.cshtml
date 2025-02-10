@@ -4,27 +4,43 @@
     ViewBag.Title = "Weather Forecast";
 }
 
-<h2>Weather Forecast</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4 text-center">
+                <h2 class="mb-4">🌤 Weather Forecast</h2>
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["Error"]</div>
+                }
 
-@if (TempData["RainWarning"] != null)
-{
-    <div class="alert alert-warning">@TempData["RainWarning"]</div>
-}
+                @if (TempData["RainWarning"] != null)
+                {
+                    <div class="alert alert-warning">@TempData["RainWarning"]</div>
+                }
 
-<form method="post" action="@Url.Action("GetWeather", "Weather")">
-    <input type="text" name="city" placeholder="Enter city" value="@Model.City" required />
-    <button type="submit">Get Weather</button>
-</form>
+                <form method="post" action="@Url.Action("GetWeather", "Weather")" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="city" class="form-control text-center" placeholder="Enter city" value="@Model.City" required />
+                        <button type="submit" class="btn btn-primary">🌍 Get Weather</button>
+                    </div>
+                </form>
 
-@if (!string.IsNullOrEmpty(Model.Description))
-{
-    <h3>Weather in @Model.City</h3>
-    <p>Description: @Model.Description</p>
-    <p>Temperature: @Model.Temperature °C</p>
-    <p>Min: @Model.TempMin °C, Max: @Model.TempMax °C</p>
-}
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <div class="mt-4">
+                        <h3 class="text-center">@Model.City</h3>
+                        <p class="text-center text-white">@Model.Description</p>
+
+                        <div class="d-flex justify-content-between">
+                            <span>🌡 Temperature: <strong>@Model.Temperature °C</strong></span>
+                            <span>⬇ Min: <strong>@Model.TempMin °C</strong></span>
+                            <span>⬆ Max: <strong>@Model.TempMax °C</strong></span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
