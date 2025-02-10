@@ -6,7 +6,12 @@ namespace WeatherApp.Controllers
 {
     public class WeatherController : Controller
     {
-        private readonly WeatherService _weatherService = new WeatherService();
+        private readonly WeatherService _weatherService;
+
+        public WeatherController(WeatherService weatherService)
+        {
+            _weatherService = weatherService;
+        }
 
         public IActionResult Index()
         {

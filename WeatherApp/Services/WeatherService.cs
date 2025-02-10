@@ -5,7 +5,13 @@ namespace WeatherApp.Services
 {
     public class WeatherService
     {
-        private const string ApiKey = "44c43431c6685c7b10a42c1a512683ab";
+        private readonly string _apiKey;
+
+        public WeatherService(IConfiguration configuration)
+        {
+            _apiKey = configuration["AppSettings:ApiKey"];
+        }
+        
         private const string BaseUrl = "https://api.openweathermap.org/data/2.5/weather";
         public async Task<WeatherModel> GetWeatherAsync(string city)
         {
@@ -13,7 +19,7 @@ namespace WeatherApp.Services
             {
                 try
                 {
-                    var response = await client.GetAsync($"{BaseUrl}?q={city}&appid={ApiKey}&units=metric&lang=en");
+                    var response = await client.GetAsync($"{BaseUrl}?q={city}&appid={_apiKey}&units=metric&lang=en");
 
                     if (!response.IsSuccessStatusCode)
                     {

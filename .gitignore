@@ -261,6 +261,9 @@ Temporary Items
 # Valid 'debug' folder, that contains CLR debuggin code
 !srcdebug
 
+# Ignore appsettings files that may contain sensitive information like API keys
+appsettings.Development.json
+
 # Ignore folders created by the test build
 TestWrappers_x64_debug
 TestWrappers_x64_checked
